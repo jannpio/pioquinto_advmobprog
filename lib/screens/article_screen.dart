@@ -1,7 +1,7 @@
 import 'package:facebook_replication/models/article_model.dart';
 import 'package:facebook_replication/services/article_service.dart';
 import 'package:facebook_replication/widgets/custom_text.dart';
-import 'package:facebook_replication/screens/article_details_screen.dart'; // Make sure this import is added
+import 'package:facebook_replication/screens/article_details_screen.dart'; 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
