@@ -11,6 +11,7 @@ class ArticleDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFDFE9F5),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -19,20 +20,42 @@ class ArticleDetailsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 20.h),
             Padding(
-              padding: EdgeInsets.all(20.w),
-              child: Placeholder(
-                fallbackHeight: 200.h,
-                fallbackWidth: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 20.h),
+              child: SizedBox(
+                height: 250.h,
+                width: double.infinity,
+                child: Placeholder(
+                  fallbackHeight: 250.h,
+                  fallbackWidth: double.infinity,
+                ),
               ),
             ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.r),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 12.h),
+              ),
+              onPressed: () {},
+              child: CustomText(
+                text: 'Read All',
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: 30.h),
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.r),
-                  topRight: Radius.circular(20.r),
+                  topLeft: Radius.circular(30.r),
+                  topRight: Radius.circular(30.r),
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -42,16 +65,16 @@ class ArticleDetailsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              padding: EdgeInsets.all(16.w),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
                     text: article.title,
                     fontSize: 20.sp,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.bold,
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 12.h),
                   CustomText(
                     text: article.body,
                     fontSize: 14.sp,

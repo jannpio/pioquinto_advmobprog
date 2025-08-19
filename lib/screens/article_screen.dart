@@ -1,6 +1,7 @@
 import 'package:facebook_replication/models/article_model.dart';
 import 'package:facebook_replication/services/article_service.dart';
 import 'package:facebook_replication/widgets/custom_text.dart';
+import 'package:facebook_replication/screens/article_details_screen.dart'; // Make sure this import is added
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -127,7 +128,12 @@ class _ArticleScreenState extends State<ArticleScreen> {
                       child: InkWell(
                         borderRadius: BorderRadius.circular(12.r),
                         onTap: () {
-                          debugPrint('Tapped: ${article.title}');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ArticleDetailsScreen(article: article),
+                            ),
+                          );
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(
