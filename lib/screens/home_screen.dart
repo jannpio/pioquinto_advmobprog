@@ -1,15 +1,14 @@
-import 'package:facebook_replication/providers/theme_provider.dart';
 import 'package:facebook_replication/screens/article_screen.dart';
+import 'package:facebook_replication/screens/settings_screen.dart';
 import 'package:facebook_replication/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget{
+class HomeScreen extends StatefulWidget {
   final String username;
   const HomeScreen({super.key, this.username = ''});
 
-  @override 
+  @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
@@ -19,8 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeModel = context.watch<ThemeProvider>();
-
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
@@ -28,39 +25,46 @@ class _HomeScreenState extends State<HomeScreen> {
           text: (_selectedIndex == 0) ? 'Articles' : 'Home',
           fontSize: 20.sp,
           fontWeight: FontWeight.w600,
-      ),
-      actions: [
-        Switch(
-          value: themeModel.isDark, 
-          onChanged: (_) => themeModel.toggleTheme(),
         ),
-      ],
-    ),
-    body: PageView(
-      controller: _pageController,
-      children: const <Widget>[ArticleScreen(), Placeholder(), Placeholder()],
-      onPageChanged: (page) {
-        setState(() {
-          _selectedIndex = page;
-        });
-      },
-    ),
-    bottomNavigationBar: BottomNavigationBar(
-    showSelectedLabels: false,
-    showUnselectedLabels: false,
-    onTap: _onTappedBar,
-    items: const [
-      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.notifications),
-        label: 'Notification'
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SettingsScreen()),
+              );
+            },
+          ),
+        ],
       ),
-      BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-    ],
-    currentIndex: _selectedIndex,
-    ),
-  );
-}
+      body: PageView(
+        controller: _pageController,
+        children: const <Widget>[
+          ArticleScreen(),
+          Placeholder(),
+          Placeholder(),
+        ],
+        onPageChanged: (page) {
+          setState(() {
+            _selectedIndex = page;
+          });
+        },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        onTap: _onTappedBar,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.notifications), label: 'Notification'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+        currentIndex: _selectedIndex,
+      ),
+    );
+  }
 
   void _onTappedBar(int value) {
     setState(() {

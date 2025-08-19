@@ -6,7 +6,7 @@ class ArticleService {
   List listData = [];
 
   Future<List> getAllArticle() async {
-    Response response = await get(Uri.parse('$host/post'));
+    Response response = await get(Uri.parse('$host/posts'));
 
     if (response.statusCode == 200) {
       listData = jsonDecode(response.body);
