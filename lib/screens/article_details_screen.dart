@@ -76,7 +76,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 12.h),
                   CustomText(
-                    text: article.body,
+                    text: article.name,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                   ),
