@@ -1,4 +1,4 @@
-name: facebook_replication
+name: pioquinto_advmobprog
 description: "A new Flutter project."
 publish_to: 'none'
 version: 0.1.0
@@ -7,12 +7,15 @@ environment:
   sdk: ^3.8.1
 
 dependencies:
+  firebase_auth: ^6.0.2
+  firebase_core: ^4.1.0
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.2.1
   flutter_screenutil: ^5.9.3
   http: ^1.5.0
   provider: ^6.1.5
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +26,7 @@ flutter:
   assets: 
     - assets/.env
     - assets/images/
+    - assets/images/NUCCITLogo.png
   fonts:
     - family: Poppins
       fonts:

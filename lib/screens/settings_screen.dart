@@ -1,11 +1,19 @@
-import 'package:facebook_replication/providers/theme_provider.dart';
-import 'package:facebook_replication/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:pioquinto_advmobprog/providers/theme_provider.dart';
+import 'package:pioquinto_advmobprog/services/user_service.dart';
+import 'package:pioquinto_advmobprog/widgets/custom_text.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
+
+  void logout(BuildContext context) {
+    UserService userService = UserService();
+
+    userService.logout();
+    Navigator.of(context).popAndPushNamed('/login');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +29,47 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(16.w),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /// Appearance Section
             CustomText(
-              text: "Dark Mode",
-              fontSize: 16.sp,
+              text: "Appearance",
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w600,
             ),
-            Switch(
-              value: themeProvider.isDark,
-              onChanged: (val) {
-                context.read<ThemeProvider>().toggleTheme();
-              },
+            SizedBox(height: 8.h),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomText(
+                  text: "Dark Mode",
+                  fontSize: 16.sp,
+                ),
+                Switch(
+                  value: themeProvider.isDark,
+                  onChanged: (val) {
+                    context.read<ThemeProvider>().toggleTheme();
+                  },
+                ),
+              ],
+            ),
+            SizedBox(height: 24.h), 
+
+            /// Logout Section
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomText(
+                  text: "Logout",
+                  fontSize: 16.sp,
+                ),
+                IconButton(
+                  onPressed: () => logout(context),
+                  icon: Icon(Icons.logout),
+                ),
+              ],
             ),
           ],
         ),

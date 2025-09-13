@@ -1,8 +1,9 @@
-import 'package:facebook_replication/screens/article_screen.dart';
-import 'package:facebook_replication/screens/settings_screen.dart';
-import 'package:facebook_replication/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pioquinto_advmobprog/screens/article_screen.dart';
+import 'package:pioquinto_advmobprog/screens/profile_screen.dart';
+import 'package:pioquinto_advmobprog/screens/settings_screen.dart';
+import 'package:pioquinto_advmobprog/widgets/custom_text.dart';
 
 class HomeScreen extends StatefulWidget {
   final String username;
@@ -16,13 +17,19 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
 
+  final List<String> _titles = [
+    'Articles',
+    'Notifications',
+    'Profile',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
         title: CustomText(
-          text: (_selectedIndex == 0) ? 'Articles' : 'Home',
+          text: _titles[_selectedIndex],
           fontSize: 20.sp,
           fontWeight: FontWeight.w600,
         ),
@@ -43,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: const <Widget>[
           ArticleScreen(),
           Placeholder(),
-          Placeholder(),
+          ProfileScreen(),
         ],
         onPageChanged: (page) {
           setState(() {
@@ -57,8 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: _onTappedBar,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label: 'Notification'),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Notification'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: _selectedIndex,

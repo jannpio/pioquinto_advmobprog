@@ -1,16 +1,26 @@
-import 'package:facebook_replication/providers/theme_provider.dart';
-import 'package:facebook_replication/screens/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:pioquinto_advmobprog/providers/theme_provider.dart';
+import 'package:pioquinto_advmobprog/screens/home_screen.dart';
+import 'package:pioquinto_advmobprog/screens/login_screen.dart';
+import 'package:pioquinto_advmobprog/screens/profile_screen.dart';
+import 'package:pioquinto_advmobprog/screens/register_screen.dart';
+import 'package:pioquinto_advmobprog/screens/splash_screen.dart';
+import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: 'assets/.env'); 
+  WidgetsFlutterBinding.ensureInitialized(); 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+      .then((_,
+      ) async {
+        await dotenv.load(fileName: 'assets/.env');
+        await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        );
     runApp(const MainApp());
   });
 }
@@ -34,9 +44,13 @@ class MainApp extends StatelessWidget {
             darkTheme: ThemeData.dark(),
             themeMode: themeModel.isDark ? ThemeMode.dark : ThemeMode.light,
             title: 'Blog App',
-            initialRoute: '/home',
+            initialRoute: '/splash',
             routes: {
+              '/splash': (context) => const SplashScreen(),
+              '/login': (context) => const LoginScreen(),
+              '/register': (context) => const RegisterScreen(),
               '/home': (context) => const HomeScreen(),
+              '/profile': (context) => const ProfileScreen(),
             },
           );
         },
